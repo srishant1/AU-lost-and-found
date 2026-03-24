@@ -1,4 +1,4 @@
-const API_BASE = '/api';
+const API_BASE = 'https://au-lost-and-found.onrender.com/api';
 
 async function handleResponse(res) {
   if (!res.ok) {

@@ -16,7 +16,7 @@ export default function Home() {
     const timeout = setTimeout(() => controller.abort(), 15000);
 
     const fetchWithSignal = (endpoint) =>
-      fetch(`${api.baseUrl || 'https://au-lost-and-found.onrender.com/api'}${endpoint}`, {
+      fetch(`/api${endpoint}`, {
         signal: controller.signal,
       }).then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);

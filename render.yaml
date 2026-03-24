@@ -1,23 +1,14 @@
 services:
-  # Backend - Spring Boot Web Service
   - type: web
     name: au-lost-and-found
     runtime: java
     plan: free
-    rootDir: backend
-    buildCommand: mvn clean package -DskipTests
-    startCommand: java -jar target/*.jar --server.port=$PORT
+    buildCommand: |
+      cd frontend-react && npm install && npm run build && cd .. &&
+      rm -rf backend/src/main/resources/static/* &&
+      cp -r frontend-react/dist/* backend/src/main/resources/static/ &&
+      cd backend && mvn clean package -DskipTests
+    startCommand: cd backend && java -jar target/*.jar --server.port=$PORT
     envVars:
       - key: PORT
         value: 8080
-
-  # Frontend - Vite React Static Site
-  - type: static
-    name: au-lost-and-found-frontend
-    rootDir: frontend-react
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html

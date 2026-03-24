@@ -12,14 +12,39 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+
+    const fetchWithSignal = (endpoint) =>
+      fetch(`${api.baseUrl || 'https://au-lost-and-found.onrender.com/api'}${endpoint}`, {
+        signal: controller.signal,
+      }).then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      });
+
     Promise.all([
-      api.get('/stats').catch(() => ({})),
-      api.get('/items/recent').catch(() => []),
-    ]).then(([s, items]) => {
-      setStats(s);
-      setRecentItems(items);
-      setLoading(false);
-    });
+      fetchWithSignal('/stats').catch(() => ({ totalLost: 0, totalFound: 0, totalClaimed: 0, totalReturned: 0 })),
+      fetchWithSignal('/items/recent').catch(() => []),
+    ])
+      .then(([s, items]) => {
+        setStats(s);
+        setRecentItems(Array.isArray(items) ? items : []);
+      })
+      .catch(() => {
+        // Fallback: ensure state is valid even if something unexpected happens
+        setStats({ totalLost: 0, totalFound: 0, totalClaimed: 0, totalReturned: 0 });
+        setRecentItems([]);
+      })
+      .finally(() => {
+        clearTimeout(timeout);
+        setLoading(false);
+      });
+
+    return () => {
+      controller.abort();
+      clearTimeout(timeout);
+    };
   }, []);
 
   const handleSearch = (e) => {

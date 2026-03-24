@@ -1,0 +1,189 @@
+.hero {
+  text-align: center;
+  padding: 4rem 0 3rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.search-bar {
+  max-width: 640px;
+  margin: 0 auto 3rem;
+  position: relative;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 16px 24px 16px 52px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 100px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: all var(--transition-normal);
+}
+
+.search-bar input:focus {
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-glow);
+  background: var(--bg-glass-hover);
+}
+
+.search-bar input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-bar .search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-align: center;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.stat-card.lost::before { background: var(--gradient-lost); }
+.stat-card.found::before { background: var(--gradient-found); }
+.stat-card.claimed::before { background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); }
+.stat-card.returned::before { background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); }
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  background: var(--bg-glass-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card .stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.stat-card.lost .stat-number { color: var(--accent-red); }
+.stat-card.found .stat-number { color: var(--accent-green); }
+.stat-card.claimed .stat-number { color: var(--accent-purple); }
+.stat-card.returned .stat-number { color: var(--accent-cyan); }
+
+.stat-card .stat-label {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.section-header a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--accent-purple-light);
+  text-decoration: none;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  grid-column: 1 / -1;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-glass);
+  border-top-color: var(--accent-purple);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-muted);
+}
+
+.empty-state .empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.4s ease;
+}

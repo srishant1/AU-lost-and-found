@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Report a lost or found item on campus">
+    <title>Report Item — Campus Lost & Found</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="navbar-brand">
+                <span class="icon">🔎</span>
+                <span>CampusL&F</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="browse.html">📋 Browse</a></li>
+                <li><a href="report.html" class="active">📝 Report</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container page-content">
+        <div class="form-container">
+            <div class="form-card fade-in-up">
+                <h2>📝 Report an Item</h2>
+                <p class="form-subtitle">Did you lose or find something on campus? Fill in the details below.</p>
+
+                <!-- Status Toggle -->
+                <div class="status-toggle">
+                    <button type="button" id="toggle-lost" class="active-lost" onclick="setReportType('LOST')">❌ I Lost Something</button>
+                    <button type="button" id="toggle-found" onclick="setReportType('FOUND')">✅ I Found Something</button>
+                </div>
+
+                <form id="report-form" onsubmit="submitReport(event)">
+                    <div class="form-group">
+                        <label for="item-title">Item Title *</label>
+                        <input type="text" id="item-title" required placeholder="e.g., Blue Backpack, iPhone 14, Student ID Card">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="item-description">Description</label>
+                        <textarea id="item-description" placeholder="Provide a detailed description — color, brand, distinguishing marks, what was inside, etc."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="item-category">Category *</label>
+                            <select id="item-category" required>
+                                <option value="">Select a category</option>
+                                <option value="Electronics">📱 Electronics</option>
+                                <option value="Bags">🎒 Bags</option>
+                                <option value="Documents">📄 Documents</option>
+                                <option value="Keys">🔑 Keys</option>
+                                <option value="Clothing">👕 Clothing</option>
+                                <option value="Personal Items">🧴 Personal Items</option>
+                                <option value="Books">📚 Books</option>
+                                <option value="Accessories">⌚ Accessories</option>
+                                <option value="Other">📦 Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-location">Location *</label>
+                            <input type="text" id="item-location" required placeholder="e.g., Library 2nd Floor, Cafeteria Block A">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reporter-name">Your Name *</label>
+                            <input type="text" id="reporter-name" required placeholder="Full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="reporter-email">Your Email *</label>
+                            <input type="email" id="reporter-email" required placeholder="campus email">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reporter-phone">Phone Number</label>
+                            <input type="tel" id="reporter-phone" placeholder="Optional — for direct contact">
+                        </div>
+                        <div class="form-group">
+                            <label for="item-image-url">Image URL</label>
+                            <input type="url" id="item-image-url" placeholder="Optional — paste an image link">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" style="margin-top:0.5rem;">
+                        🚀 Submit Report
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Campus Lost & Found. Built for safer campuses. 💜</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        function setReportType(type) {
+            const lostBtn = document.getElementById('toggle-lost');
+            const foundBtn = document.getElementById('toggle-found');
+            lostBtn.className = type === 'LOST' ? 'active-lost' : '';
+            foundBtn.className = type === 'FOUND' ? 'active-found' : '';
+        }
+    </script>
+</body>
+</html>

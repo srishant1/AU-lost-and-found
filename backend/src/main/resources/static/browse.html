@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse and search for lost and found items on campus">
+    <title>Browse Items — Campus Lost & Found</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="navbar-brand">
+                <span class="icon">🔎</span>
+                <span>CampusL&F</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="browse.html" class="active">📋 Browse</a></li>
+                <li><a href="report.html">📝 Report</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container page-content">
+        <div class="section-header" style="margin-bottom:0.5rem;">
+            <h2>📋 Browse Items</h2>
+            <a href="report.html">+ Report New Item</a>
+        </div>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Search and filter through all reported lost & found items.</p>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+            <select id="filter-status" onchange="loadBrowseItems()">
+                <option value="">All Status</option>
+                <option value="LOST">❌ Lost</option>
+                <option value="FOUND">✅ Found</option>
+                <option value="CLAIMED">🙋 Claimed</option>
+                <option value="RETURNED">🔄 Returned</option>
+            </select>
+            <select id="filter-category" onchange="loadBrowseItems()">
+                <option value="">All Categories</option>
+                <option value="Electronics">📱 Electronics</option>
+                <option value="Bags">🎒 Bags</option>
+                <option value="Documents">📄 Documents</option>
+                <option value="Keys">🔑 Keys</option>
+                <option value="Clothing">👕 Clothing</option>
+                <option value="Personal Items">🧴 Personal Items</option>
+                <option value="Books">📚 Books</option>
+                <option value="Accessories">⌚ Accessories</option>
+                <option value="Other">📦 Other</option>
+            </select>
+            <input type="text" id="filter-keyword" placeholder="🔍 Search by keyword..."
+                   oninput="debounceSearch()" style="flex:1; min-width:200px;">
+        </div>
+
+        <!-- Items Grid -->
+        <div class="items-grid" id="browse-items-grid">
+            <div class="loading"><div class="spinner"></div></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Campus Lost & Found. Built for safer campuses. 💜</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        let searchTimeout;
+        function debounceSearch() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(loadBrowseItems, 400);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Pre-fill keyword from URL if coming from hero search
+            const urlKeyword = getQueryParam('keyword');
+            if (urlKeyword) {
+                document.getElementById('filter-keyword').value = urlKeyword;
+            }
+            loadBrowseItems();
+        });
+    </script>
+</body>
+</html>

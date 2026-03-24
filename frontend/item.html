@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View item details and submit a claim">
+    <title>Item Details — Campus Lost & Found</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="navbar-brand">
+                <span class="icon">🔎</span>
+                <span>CampusL&F</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="browse.html">📋 Browse</a></li>
+                <li><a href="report.html">📝 Report</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container page-content">
+        <div style="margin-bottom:1.5rem;">
+            <a href="browse.html" style="font-size:0.9rem;">← Back to Browse</a>
+        </div>
+        <div class="item-detail" id="item-detail-container">
+            <div class="loading"><div class="spinner"></div></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Campus Lost & Found. Built for safer campuses. 💜</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', loadItemDetail);
+    </script>
+</body>
+</html>

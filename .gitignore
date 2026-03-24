@@ -1,0 +1,19 @@
+# Build output
+backend/target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Maven wrapper jar (downloaded automatically)
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# Node
+node_modules/
+package-lock.json
